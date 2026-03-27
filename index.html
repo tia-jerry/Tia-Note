@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tia's Hub - Your Personal Study Companion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header/Navigation */
+        .navbar {
+            background: white;
+            border-radius: 20px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo h1 {
+            font-size: 28px;
+            background: linear-gradient(135deg, #ff6b8b 0%, #ff99cc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo p {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .nav-item:hover {
+            background: #f5f5f5;
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, #ff6b8b 0%, #ff99cc 100%);
+            color: white;
+        }
+
+        .nav-item.active .nav-icon {
+            color: white;
+        }
+
+        .nav-item.active .nav-label {
+            color: white;
+        }
+
+        .nav-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .nav-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: #666;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .welcome-badge {
+            color: #ff6b8b;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .welcome-section h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .welcome-section h2 span {
+            background: linear-gradient(135deg, #ff6b8b 0%, #ff99cc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .welcome-section p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b8b 0%, #ff99cc 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 139, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #ff6b8b;
+            border: 2px solid #ff6b8b;
+        }
+
+        .btn-secondary:hover {
+            background: #ff6b8b;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: #ff4757;
+            color: white;
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .btn-danger:hover {
+            background: #ff3838;
+            transform: translateY(-2px);
+        }
+
+        .btn-edit {
+            background: #4CAF50;
+            color: white;
+            padding: 6px 12px;
+            font-size: 12px;
+            margin-right: 8px;
+        }
+
+        .btn-edit:hover {
+            background: #45a049;
+        }
+
+        /* Main Content Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        /* Notes Section */
+        .notes-section, .diary-section {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .section-header h3 {
+            font-size: 20px;
+            color: #333;
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 12px;
+        }
+
+        /* Notes List */
+        .notes-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .note-item, .diary-item {
+            background: #f9f9f9;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .note-item:hover, .diary-item:hover {
+            transform: translateX(5px);
+            background: #f0f0f0;
+        }
+
+        .note-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .note-title {
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+            flex: 1;
+            cursor: pointer;
+        }
+
+        .note-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-icon {
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .action-icon.edit {
+            color: #4CAF50;
+        }
+
+        .action-icon.edit:hover {
+            background: #e8f5e9;
+        }
+
+        .action-icon.delete {
+            color: #ff4757;
+        }
+
+        .action-icon.delete:hover {
+            background: #ffebee;
+        }
+
+        .note-preview {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .note-date {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        /* Tip Section */
+        .tip-section {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            border-radius: 20px;
+            padding: 25px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .tip-section h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .tip-section p {
+            font-size: 14px;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            font-size: 24px;
+        }
+
+        .close-modal {
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Confirm Dialog */
+        .confirm-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1100;
+        }
+
+        .confirm-dialog {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .confirm-dialog p {
+            margin: 20px 0;
+            color: #333;
+        }
+
+        .confirm-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+            
+            .welcome-section h2 {
+                font-size: 24px;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ff6b8b;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <div class="navbar">
+            <div class="logo">
+                <h1>🌸 Tia's Hub</h1>
+                <p>Your personal study companion</p>
+            </div>
+            <div class="nav-links">
+                <div class="nav-item active" onclick="switchTab('dashboard')">
+                    <div class="nav-icon">📊</div>
+                    <div class="nav-label">Dashboard</div>
+                </div>
+                <div class="nav-item" onclick="switchTab('notes')">
+                    <div class="nav-icon">📝</div>
+                    <div class="nav-label">My Notes</div>
+                </div>
+                <div class="nav-item" onclick="switchTab('diary')">
+                    <div class="nav-icon">📔</div>
+                    <div class="nav-label">My Diary</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard View -->
+        <div id="dashboardView">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <div class="welcome-badge">Welcome back</div>
+                <h2>Hello, <span>Tia!</span> 🥰</h2>
+                <p>Keep up the great work! Your notes and diary are waiting for you.</p>
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="openNoteModal()">+ New Note</button>
+                    <button class="btn btn-secondary" onclick="openDiaryModal()">Write Diary</button>
+                </div>
+            </div>
+
+            <!-- Main Grid -->
+            <div class="main-grid">
+                <!-- Recent Notes -->
+                <div class="notes-section">
+                    <div class="section-header">
+                        <h3>📝 Recent Notes</h3>
+                        <button class="btn btn-primary btn-small" onclick="openNoteModal()">+ New Note</button>
+                    </div>
+                    <div id="notesList" class="notes-list">
+                        <!-- Notes will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Diary Entries -->
+                <div class="diary-section">
+                    <div class="section-header">
+                        <h3>📔 Recent Diary Entries</h3>
+                        <button class="btn btn-secondary btn-small" onclick="openDiaryModal()">+ Write Entry</button>
+                    </div>
+                    <div id="diaryList" class="notes-list">
+                        <!-- Diary entries will be inserted here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tip Section -->
+            <div class="tip-section">
+                <h4>💡 Tip</h4>
+                <p>Stay organized and review your notes regularly for better results!</p>
+            </div>
+        </div>
+
+        <!-- Notes View (hidden by default) -->
+        <div id="notesView" style="display: none;">
+            <div class="welcome-section">
+                <h2>📝 My Notes</h2>
+                <p>All your study notes in one place</p>
+                <button class="btn btn-primary" onclick="openNoteModal()">+ New Note</button>
+            </div>
+            <div class="notes-section" style="margin-bottom: 30px;">
+                <div id="notesFullList" class="notes-list">
+                    <!-- All notes will be inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Diary View (hidden by default) -->
+        <div id="diaryView" style="display: none;">
+            <div class="welcome-section">
+                <h2>📔 My Diary</h2>
+                <p>Your personal thoughts and reflections</p>
+                <button class="btn btn-secondary" onclick="openDiaryModal()">+ Write Entry</button>
+            </div>
+            <div class="diary-section" style="margin-bottom: 30px;">
+                <div id="diaryFullList" class="notes-list">
+                    <!-- All diary entries will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Note Modal -->
+    <div id="noteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="noteModalTitle">📝 Create New Note</h3>
+                <span class="close-modal" onclick="closeNoteModal()">&times;</span>
+            </div>
+            <form id="noteForm">
+                <input type="hidden" id="editNoteId">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="noteTitle" placeholder="Enter note title..." required>
+                </div>
+                <div class="form-group">
+                    <label>Content</label>
+                    <textarea id="noteContent" placeholder="Write your notes here..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;" id="saveNoteBtn">Save Note</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Diary Modal -->
+    <div id="diaryModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="diaryModalTitle">📔 Write Diary Entry</h3>
+                <span class="close-modal" onclick="closeDiaryModal()">&times;</span>
+            </div>
+            <form id="diaryForm">
+                <input type="hidden" id="editDiaryId">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="diaryTitle" placeholder="What's on your mind?" required>
+                </div>
+                <div class="form-group">
+                    <label>Entry</label>
+                    <textarea id="diaryEntry" placeholder="Write your thoughts here..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-secondary" style="width: 100%;" id="saveDiaryBtn">Save Entry</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Confirm Delete Dialog -->
+    <div id="confirmDialog" class="confirm-overlay">
+        <div class="confirm-dialog">
+            <h3>Confirm Delete</h3>
+            <p id="confirmMessage">Are you sure you want to delete this item?</p>
+            <div class="confirm-buttons">
+                <button class="btn btn-secondary" onclick="confirmDelete(false)">Cancel</button>
+                <button class="btn btn-danger" onclick="confirmDelete(true)">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data storage
+        let notes = [];
+        let diaryEntries = [];
+        let deleteCallback = null;
+
+        // Load data from localStorage
+        function loadData() {
+            const savedNotes = localStorage.getItem('tiaHubNotes');
+            const savedDiary = localStorage.getItem('tiaHubDiary');
+            
+            if (savedNotes) {
+                notes = JSON.parse(savedNotes);
+            } else {
+                // Add some sample notes
+                notes = [
+                    {
+                        id: Date.now(),
+                        title: "Welcome to Tia's Hub!",
+                        content: "Start by creating your first note. You can save all your study materials here! You can edit or delete notes anytime by clicking the icons.",
+                        date: new Date().toLocaleDateString()
+                    }
+                ];
+                saveNotes();
+            }
+            
+            if (savedDiary) {
+                diaryEntries = JSON.parse(savedDiary);
+            } else {
+                // Add some sample diary entries
+                diaryEntries = [
+                    {
+                        id: Date.now() + 1,
+                        title: "First Day!",
+                        content: "Excited to start using Tia's Hub to organize my studies! I can now edit or delete my entries anytime.",
+                        date: new Date().toLocaleDateString()
+                    }
+                ];
+                saveDiary();
+            }
+        }
+
+        function saveNotes() {
+            localStorage.setItem('tiaHubNotes', JSON.stringify(notes));
+        }
+
+        function saveDiary() {
+            localStorage.setItem('tiaHubDiary', JSON.stringify(diaryEntries));
+        }
+
+        // Display notes
+        function displayNotes() {
+            const notesListDiv = document.getElementById('notesList');
+            const notesFullListDiv = document.getElementById('notesFullList');
+            
+            // Display in dashboard (recent 3)
+            const recentNotes = notes.slice(0, 3);
+            if (recentNotes.length === 0) {
+                notesListDiv.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📝</div>
+                        <p>No notes yet. Start by creating one!</p>
+                    </div>
+                `;
+            } else {
+                notesListDiv.innerHTML = recentNotes.map(note => renderNoteItem(note)).join('');
+            }
+            
+            // Display all notes in notes view
+            if (notesFullListDiv) {
+                if (notes.length === 0) {
+                    notesFullListDiv.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📝</div>
+                            <p>No notes yet. Start by creating one!</p>
+                        </div>
+                    `;
+                } else {
+                    notesFullListDiv.innerHTML = notes.map(note => renderNoteItem(note)).join('');
+                }
+            }
+        }
+        
+        // Render a single note item
+        function renderNoteItem(note) {
+            return `
+                <div class="note-item" data-id="${note.id}">
+                    <div class="note-header">
+                        <div class="note-title" onclick="viewNote('${note.id}')">${escapeHtml(note.title)}</div>
+                        <div class="note-actions">
+                            <span class="action-icon edit" onclick="editNote('${note.id}')">✏️ Edit</span>
+                            <span class="action-icon delete" onclick="deleteNotePrompt('${note.id}')">🗑️ Delete</span>
+                        </div>
+                    </div>
+                    <div class="note-preview" onclick="viewNote('${note.id}')">${escapeHtml(note.content.substring(0, 100))}${note.content.length > 100 ? '...' : ''}</div>
+                    <div class="note-date">${note.date}</div>
+                </div>
+            `;
+        }
+        
+        // Display diary entries
+        function displayDiary() {
+            const diaryListDiv = document.getElementById('diaryList');
+            const diaryFullListDiv = document.getElementById('diaryFullList');
+            
+            // Display in dashboard (recent 3)
+            const recentDiary = diaryEntries.slice(0, 3);
+            if (recentDiary.length === 0) {
+                diaryListDiv.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📔</div>
+                        <p>No diary entries yet. Start writing!</p>
+                    </div>
+                `;
+            } else {
+                diaryListDiv.innerHTML = recentDiary.map(entry => renderDiaryItem(entry)).join('');
+            }
+            
+            // Display all entries in diary view
+            if (diaryFullListDiv) {
+                if (diaryEntries.length === 0) {
+                    diaryFullListDiv.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📔</div>
+                            <p>No diary entries yet. Start writing!</p>
+                        </div>
+                    `;
+                } else {
+                    diaryFullListDiv.innerHTML = diaryEntries.map(entry => renderDiaryItem(entry)).join('');
+                }
+            }
+        }
+        
+        // Render a single diary item
+        function renderDiaryItem(entry) {
+            return `
+                <div class="diary-item" data-id="${entry.id}">
+                    <div class="note-header">
+                        <div class="note-title" onclick="viewDiary('${entry.id}')">${escapeHtml(entry.title)}</div>
+                        <div class="note-actions">
+                            <span class="action-icon edit" onclick="editDiary('${entry.id}')">✏️ Edit</span>
+                            <span class="action-icon delete" onclick="deleteDiaryPrompt('${entry.id}')">🗑️ Delete</span>
+                        </div>
+                    </div>
+                    <div class="note-preview" onclick="viewDiary('${entry.id}')">${escapeHtml(entry.content.substring(0, 100))}${entry.content.length > 100 ? '...' : ''}</div>
+                    <div class="note-date">${entry.date}</div>
+                </div>
+            `;
+        }
+        
+        // View full note
+        function viewNote(id) {
+            const note = notes.find(n => n.id == id);
+            if (note) {
+                alert(`📝 ${note.title}\n\n${note.content}\n\n📅 ${note.date}`);
+            }
+        }
+        
+        // View full diary entry
+        function viewDiary(id) {
+            const entry = diaryEntries.find(e => e.id == id);
+            if (entry) {
+                alert(`📔 ${entry.title}\n\n${entry.content}\n\n📅 ${entry.date}`);
+            }
+        }
+        
+        // Edit note
+        function editNote(id) {
+            const note = notes.find(n => n.id == id);
+            if (note) {
+                document.getElementById('editNoteId').value = note.id;
+                document.getElementById('noteTitle').value = note.title;
+                document.getElementById('noteContent').value = note.content;
+                document.getElementById('noteModalTitle').textContent = '✏️ Edit Note';
+                document.getElementById('saveNoteBtn').textContent = 'Update Note';
+                openNoteModal();
+            }
+        }
+        
+        // Edit diary
+        function editDiary(id) {
+            const entry = diaryEntries.find(e => e.id == id);
+            if (entry) {
+                document.getElementById('editDiaryId').value = entry.id;
+                document.getElementById('diaryTitle').value = entry.title;
+                document.getElementById('diaryEntry').value = entry.content;
+                document.getElementById('diaryModalTitle').textContent = '✏️ Edit Diary Entry';
+                document.getElementById('saveDiaryBtn').textContent = 'Update Entry';
+                openDiaryModal();
+            }
+        }
+        
+        // Delete note prompt
+        function deleteNotePrompt(id) {
+            deleteCallback = () => deleteNote(id);
+            document.getElementById('confirmMessage').textContent = 'Are you sure you want to delete this note? This action cannot be undone.';
+            document.getElementById('confirmDialog').style.display = 'flex';
+        }
+        
+        // Delete diary prompt
+        function deleteDiaryPrompt(id) {
+            deleteCallback = () => deleteDiary(id);
+            document.getElementById('confirmMessage').textContent = 'Are you sure you want to delete this diary entry? This action cannot be undone.';
+            document.getElementById('confirmDialog').style.display = 'flex';
+        }
+        
+        // Delete note
+        function deleteNote(id) {
+            notes = notes.filter(n => n.id != id);
+            saveNotes();
+            displayNotes();
+            if (document.getElementById('notesView').style.display !== 'none') {
+                displayNotes();
+            }
+        }
+        
+        // Delete diary
+        function deleteDiary(id) {
+            diaryEntries = diaryEntries.filter(e => e.id != id);
+            saveDiary();
+            displayDiary();
+            if (document.getElementById('diaryView').style.display !== 'none') {
+                displayDiary();
+            }
+        }
+        
+        // Add or update note
+        function saveNote(title, content, editId) {
+            if (editId) {
+                // Update existing note
+                const index = notes.findIndex(n => n.id == editId);
+                if (index !== -1) {
+                    notes[index] = {
+                        ...notes[index],
+                        title: title,
+                        content: content,
+                        date: new Date().toLocaleDateString()
+                    };
+                }
+            } else {
+                // Create new note
+                const newNote = {
+                    id: Date.now(),
+                    title: title,
+                    content: content,
+                    date: new Date().toLocaleDateString()
+                };
+                notes.unshift(newNote);
+            }
+            saveNotes();
+            displayNotes();
+            closeNoteModal();
+        }
+        
+        // Add or update diary entry
+        function saveDiaryEntry(title, content, editId) {
+            if (editId) {
+                // Update existing entry
+                const index = diaryEntries.findIndex(e => e.id == editId);
+                if (index !== -1) {
+                    diaryEntries[index] = {
+                        ...diaryEntries[index],
+                        title: title,
+                        content: content,
+                        date: new Date().toLocaleDateString()
+                    };
+                }
+            } else {
+                // Create new entry
+                const newEntry = {
+                    id: Date.now(),
+                    title: title,
+                    content: content,
+                    date: new Date().toLocaleDateString()
+                };
+                diaryEntries.unshift(newEntry);
+            }
+            saveDiary();
+            displayDiary();
+            closeDiaryModal();
+        }
+        
+        // Modal functions
+        function openNoteModal() {
+            document.getElementById('noteModal').style.display = 'flex';
+        }
+        
+        function closeNoteModal() {
+            document.getElementById('noteModal').style.display = 'none';
+            document.getElementById('noteForm').reset();
+            document.getElementById('editNoteId').value = '';
+            document.getElementById('noteModalTitle').textContent = '📝 Create New Note';
+            document.getElementById('saveNoteBtn').textContent = 'Save Note';
+        }
+        
+        function openDiaryModal() {
+            document.getElementById('diaryModal').style.display = 'flex';
+        }
+        
+        function closeDiaryModal() {
+            document.getElementById('diaryModal').style.display = 'none';
+            document.getElementById('diaryForm').reset();
+            document.getElementById('editDiaryId').value = '';
+            document.getElementById('diaryModalTitle').textContent = '📔 Write Diary Entry';
+            document.getElementById('saveDiaryBtn').textContent = 'Save Entry';
+        }
+        
+        // Confirm delete
+        function confirmDelete(confirmed) {
+            if (confirmed && deleteCallback) {
+                deleteCallback();
+            }
+            document.getElementById('confirmDialog').style.display = 'none';
+            deleteCallback = null;
+        }
+        
+        // Tab switching
+        function switchTab(tab) {
+            // Update active nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.closest('.nav-item').classList.add('active');
+            
+            // Show/hide views
+            document.getElementById('dashboardView').style.display = 'none';
+            document.getElementById('notesView').style.display = 'none';
+            document.getElementById('diaryView').style.display = 'none';
+            
+            if (tab === 'dashboard') {
+                document.getElementById('dashboardView').style.display = 'block';
+                displayNotes();
+                displayDiary();
+            } else if (tab === 'notes') {
+                document.getElementById('notesView').style.display = 'block';
+                displayNotes();
+            } else if (tab === 'diary') {
+                document.getElementById('diaryView').style.display = 'block';
+                displayDiary();
+            }
+        }
+        
+        // Helper function to escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        // Event listeners
+        document.getElementById('noteForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const title = document.getElementById('noteTitle').value;
+            const content = document.getElementById('noteContent').value;
+            const editId = document.getElementById('editNoteId').value;
+            if (title.trim()) {
+                saveNote(title, content, editId);
+            }
+        });
+        
+        document.getElementById('diaryForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const title = document.getElementById('diaryTitle').value;
+            const content = document.getElementById('diaryEntry').value;
+            const editId = document.getElementById('editDiaryId').value;
+            if (title.trim()) {
+                saveDiaryEntry(title, content, editId);
+            }
+        });
+        
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const noteModal = document.getElementById('noteModal');
+            const diaryModal = document.getElementById('diaryModal');
+            const confirmDialog = document.getElementById('confirmDialog');
+            if (event.target === noteModal) {
+                closeNoteModal();
+            }
+            if (event.target === diaryModal) {
+                closeDiaryModal();
+            }
+            if (event.target === confirmDialog) {
+                confirmDelete(false);
+            }
+        }
+        
+        // Initialize
+        loadData();
+        displayNotes();
+        displayDiary();
+    </script>
+</body>
+</html>
